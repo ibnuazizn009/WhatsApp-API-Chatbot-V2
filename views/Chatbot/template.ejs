@@ -1,0 +1,258 @@
+<%- contentFor('HeaderCss') %>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+  crossorigin="anonymous"
+/>
+<style>
+    div.preview-images > img {
+      width: 20%;
+    }
+    * {
+        box-sizing: border-box;
+    }
+
+    .rowimg {
+    display: flex;
+    }
+
+    .columnimg {
+    padding: 0 20px 0 0;
+    }
+
+    .ps{
+        margin-bottom: auto !important;
+        margin-top: 8px;
+    }
+  </style>
+<%- contentFor('breadcrumb') %>
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">Editable Table</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                    <li class="breadcrumb-item active">Editable Table</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<%- contentFor('body') %>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <!-- Modal For Text-->
+                <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Form For Reply Message Text</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/template" method="POST">
+                                <div class="form-group">
+                                  <label for="keyword">Kata Kunci/Keyword</label>
+                                  <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter kata kunci/keyword" required>
+                                  <small id="emailHelp" class="form-text text-muted">Kata Kunci Eg. Hai</small>
+                                </div>
+                                <div class="form-group">
+                                  <label for="message">Message Reply</label>
+                                  <textarea name="message" id="message" cols="50" rows="10" placeholder="Message Here"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <p class="ps"><small>*PS :</small></p>
+                                <p class="ket"><small> *Keword tidak boleh sama satu sama lain</small></p>
+                              </form>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- end Modal -->
+
+                <!-- Modal For Image-->
+                <div class="modal fade " id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Form For Reply Message Image<img src="" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/template" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                  <label for="keyword">Kata Kunci/Keyword</label>
+                                  <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Enter kata kunci/keyword" required>
+                                  <small id="emailHelp" class="form-text text-muted">Kata Kunci Eg. Hai</small>
+                                </div>
+                                <div class="form-group">
+                                  <label for="image">Image Reply</label>
+                                  <input type="file" name="replyimage" accept="image/*" multiple id="image">
+                                </div>
+                                <hr/>
+                                
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <p class="ps"><small>*PS :</small></p>
+                                <p class="ket"><small> *Keword tidak boleh sama satu sama lain</small></p>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="preview-images"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- end Modal -->
+                
+                <h4 class="card-title">Dialog Flow</h4>
+                <p class="card-title-desc">Alur kata kunci dan Respon yang akan muncul di chatbot</p>
+
+                <% if(message.length > 0){ %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <%- message %>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                <% } %> 
+
+                <div class="btn-group me-1 mt-2">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tambah Data<i class="mdi mdi-chevron-down"></i></button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#exampleModal">Add With Text</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#imageModal" href="#imageModal">Add With Image</a>
+                    </div>
+                </div><!-- /btn-group -->
+
+                <div class="table-responsive">
+                    <table class="table table-editable table-nowrap align-middle table-edits">
+                        <thead>
+                            <tr>
+                                <th>Kata Kunci</th>
+                                <th>Balasan</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(result.length){ %>
+                                <% result.forEach(function(msg){ %>
+                                    <tr data-id="1">
+                                    <% if(msg.message){ %>
+                                        <td data-field="id" style="width: 20px"><%= msg.keyword%></td>
+                                        <td data-field="name"> <%= msg.message %></td>
+                                        <td style="width: 100px">
+                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                        </td>
+                                        <td style="width: 100px">
+                                            <a href="/deletemsgtext/<%=msg._id%>" class="btn btn-outline-secondary btn-sm delete" title="Delete" onclick="return confirm('Are you sure to delete this record ?');">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                    <% } %>
+
+                                    </tr>
+                                <% }) %>
+                                    <% key.forEach(function(word){ %>
+                                        <tr data-id="2">
+                                            <td data-field="id"><%= word%></td>
+                                            <td data-field="name">
+                                                <div class="rowimg">
+                                                    <% result.forEach(function(img){ %>
+                                                        <% if(img.keyword === word){ %>
+                                                            <div class="columnimg">
+                                                                <img width="50" height="60" src="data:<%=img.contentType%>;base64,<%= img.replyimage %>">
+                                                            </div>
+                                                        <% } %>
+                                                    <% }) %>
+                                                </div>
+                                            </td>
+                                            <td style="width: 100px">
+                                                <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                            </td>
+                                               
+                                            <td style="width: 100px">
+                                                <a href="/deletemsgimg/<%=word%>" class="btn btn-outline-secondary btn-sm delete" title="Delete" onclick="return confirm('Are you sure to delete this record ?');">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </td>
+                                        </tr>                                
+                                    <%})%>
+                            <% }else{ %>
+                                <tr>
+                                    <td>No Data Found</td>
+                                </tr>
+                            <% } %>                        
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+<%- contentFor('FooterJs') %>
+
+<!-- Table Editable plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="public/assets/libs/table-edits/build/table-edits.min.js"></script>
+
+<script src="public/assets/js/pages/table-editable.int.js"></script> 
+
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+  crossorigin="anonymous"
+></script>
+<script>
+    $(document).ready(function() {
+        let imagesPreview = function(input, placeToInsertImagePreview) {
+          if (input.files) {
+            let filesAmount = input.files.length;
+            for (i = 0; i < filesAmount; i++) {
+              let reader = new FileReader();
+              reader.onload = function(event) {
+                $($.parseHTML("<img>"))
+                  .attr("src", event.target.result)
+                  .appendTo(placeToInsertImagePreview);
+              };
+              reader.readAsDataURL(input.files[i]);
+            }
+          }
+        };
+        $("#image").on("change", function() {
+          imagesPreview(this, "div.preview-images");
+        });
+      });
+</script>
+
+<%- contentFor('BottomJs') %>

@@ -1,0 +1,197 @@
+<%- contentFor('HeaderCss') %>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+  crossorigin="anonymous"
+/>
+
+<style>
+   .step1 {
+        width: 100px;
+        height: auto;
+        /* ease | ease-in | ease-out | linear */
+        transition: transform ease-in-out 0.3s;
+    }
+    .step1:hover {
+        transform: scale(1.2);
+    }
+</style>
+<%- contentFor('breadcrumb') %>
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">User Grid</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Contacts</a></li>
+                    <li class="breadcrumb-item active">User Grid</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<%- contentFor('body') %>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+            
+                <h4 class="card-title">Default Datatable</h4>
+                <p class="card-title-desc">DataTables has most features enabled by
+                    default, so all you need to do to use it with your own tables is to call
+                    the construction function: <code>$().DataTable();</code>.
+                </p>
+
+                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                    <tr>
+                        <th>Koneksi</th>
+                        <th>Nama</th>
+                        <th>No Whatsapp</th>
+                        <th>Satus</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>                                                 
+                            <div class="btn-group me-1 mt-2">                                              
+                                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">KONEKSI WHATSAPP<i class="mdi mdi-chevron-down"></i></button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg" href="#myModal" role="button">Scan QR Code</a>
+
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target=".bs-example-modal-lg2" href="#myModal2" role="button">Keluar Whatsapp</a>
+                                </div>
+                                </div>
+                        </td>
+                        <td class="username">Admin</td>
+                        <td class="info"><%= info %></td>
+                        <td class="status"><%= state %></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+    
+    <!--  Large modal For Scan QR -->
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" id="myModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myLargeModalLabel">Scan QR Code</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="row">
+                <div class="modal-body col-md-8">
+                    <P>1. Buka aplikasi di Whatsapp di ponesl kamu</P>
+                    <P>2. Tap menu settings (pengaturan) dan pilih Whatsapp Web</P>
+                    <P>3. Arahkan kamera ponsel kamu ke layar ini untuk melakukan scanning QrCode</P>
+                    <P>4. Tunggu beberapa saat hingga muncul informasi ponsel yang terkoneksi dengan Whatsapp</P>
+                    <p>5. gagal, refresh dulu aplikasi ini</p>
+                    
+                    
+                </div>              
+                    <div class="col-md-4">
+                        <img src="" alt="QR Code" id="qrcode">
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+     <!--  Large modal For Keluar Whatsapp -->
+     <div class="modal fade bs-example-modal-lg2" tabindex="-1" id="myModal2" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg2">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myLargeModalLabel">Keluar Whatsapp</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="row">
+                <div class="modal-body col-md-8">
+                    <P>1. Buka aplikasi di Whatsapp di ponesl kamu</P>
+                    <P>2. Tap menu settings (pengaturan) dan pilih Whatsapp Web</P>
+                    <P>3. Setelah itu akan terdapat beberapa komputer yang pernah anda gunakan</P>
+                    <!-- <p><img class="step1" width="100" height="100" src="public/assets/images/step1.jpeg" alt="step1"></p> -->
+                    <P>4. Tap pada daftar komputer yang terhubung </P>
+                    <P>5. Akan muncul notofikasi lalu pilih Logout </P>
+                    <!-- <p><img class="step2" width="100" height="100" src="public/assets/images/step2.jpeg" alt="step2"></p> -->
+                    <P>6. Selesai </P>
+                    <!-- <p><img class="step3" width="100" height="100" src="public/assets/images/step3.jpeg" alt="step3"></p> -->
+                </div>              
+                    
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    
+
+
+
+
+
+
+<%- contentFor('FooterJs') %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.min.js" integrity="sha512-2hIBfT6wur46uR5ayhmyICuA8s15BvJhagB+jZImgktQAy832P7EuY8njl1HGp4YS0Sk8DXRo9dByhvD3jfDxA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+		$(document).ready(function() {
+			var socket = io();
+
+			socket.on('message', function(msg) {
+				$('.logs').append($('<li>').text(msg));
+			});
+
+            // socket.emit('create-session', {
+			// 		id: Math.floor(Math.random() * 10) + 1,
+			// 		state: 'DISCONNECTED'
+			// });
+
+			socket.on('qr', function(src) {
+				$('#qrcode').attr('src', src);
+				$('#qrcode').show();
+			});
+
+			socket.on('ready', function(data) {
+				$('#qrcode').hide();
+			});
+
+			socket.on('authenticated', function(data) {
+				$('#qrcode').hide();
+                $('#myModal').modal('hide');
+                setTimeout(() => {
+                   location.reload() 
+                }, 1000);
+			});
+
+            socket.on('disconnected', function(data) {
+                setTimeout(function(){
+                    window.location.href = '/'
+                }, 1000)            
+			});
+
+            socket.on('remove-session', function(data) {
+                $('.info').replaceWith("<td class='info'></td>");
+                $('.status').replaceWith("<td class='status'> NOT CONNECTED</td>");
+			});
+		});
+	</script>
+<%- contentFor('BottomJs') %>
